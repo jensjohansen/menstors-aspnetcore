@@ -1,0 +1,243 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:43 PM*/ -->
+
+
+@model Academy.Mentors.Administration.PaginatedList<Academy.Mentors.Models.Review>
+@{
+	ViewData["Title"] = "Reviews";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+	<a asp-action="Create"
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+			>Create new Review</a>
+</p>
+
+<form asp-action="Index" method="get">
+	<div class="form-actions no-color">
+		<p>
+			Find:&nbsp;
+ 			<input name="searchString" type="text" value="@ViewData["currentFilter"]" />
+			<input name="CurrentSort" type="hidden" value="@ViewData["CurrentSort"]" />
+			<input name="pageSize" type="hidden" value="@ViewData["pageSize"]" />
+			<input name="ContributorId" type="hidden" value="@ViewData["ContributorId"]" />
+			<input name="PaperId" type="hidden" value="@ViewData["PaperId"]" />
+			<input name="PaperVersionId" type="hidden" value="@ViewData["PaperVersionId"]" />
+			<input name="AuditEnteredBy" type="hidden" value="@ViewData["AuditEnteredBy"]" />
+			<input name="AuditUpdatedBy" type="hidden" value="@ViewData["AuditUpdatedBy"]" />
+			<input type="submit" value="Search" class="btn btn-default" /> |
+			<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+			>Clear Search</a>
+		</p>
+	</div>
+</form>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th><!-- nav --></th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["NameSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Name</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["DescriptionSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Description</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["ContributorIdSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Contributor Id</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["PaperIdSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Paper Id</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["PaperVersionIdSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Paper Version Id</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CommentsSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Comments</a>
+				</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{ 
+		<tr>
+				<td>
+				<a asp-action="Details" 
+					asp-route-id="@item.Id"
+					asp-route-sortOrder="CurrentSort"
+					asp-route-currentFilter="CurrentFilter"
+					asp-route-page="page"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					><img src="~/images/ButtonBarViewOver.gif" /></a>
+				<a asp-action="Edit" 
+					asp-route-id="@item.Id"
+					asp-route-sortOrder="CurrentSort"
+					asp-route-currentFilter="CurrentFilter"
+					asp-route-page="page"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					><img src="~/images/ButtonBarEditOver.gif" /></a>
+				<a asp-action="Delete" 
+					asp-route-id="@item.Id"
+					asp-route-sortOrder="CurrentSort"
+					asp-route-currentFilter="CurrentFilter"
+					asp-route-page="page"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					><img src="~/images/ButtonBarDeleteOver.gif" /></a>
+				</td>
+				<td>@Html.DisplayFor(modelItem => item.Name)</td>
+				<td>@Html.DisplayFor(modelItem => item.Description)</td>
+				<td>@Html.DisplayFor(modelItem => item.ContributorId)</td>
+				<td>@Html.DisplayFor(modelItem => item.PaperId)</td>
+				<td>@Html.DisplayFor(modelItem => item.PaperVersionId)</td>
+				<td>@Html.DisplayFor(modelItem => item.Comments)</td>
+		</tr>
+		}
+	</tbody>
+</table>
+@{
+	var prevDisabled = !Model.HasPreviousPage ? "disabled" : ""; 
+	var nextDisabled = !Model.HasNextPage ? "disabled" : ""; 
+}
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="1"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">First</a>
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="@(Model.PageIndex - 1)"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">Previous</a>
+
+&nbsp; - Page @(Model.PageIndex) of @(Model.TotalPages) - &nbsp;
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="@(Model.PageIndex + 1)"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">Next</a>
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="@(Model.TotalPages)"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">Last</a>
+

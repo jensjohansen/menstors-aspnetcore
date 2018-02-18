@@ -1,0 +1,71 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:44 PM */ -->
+
+
+@model Academy.Mentors.Models.JwtUser
+@{
+	ViewData["Title"] = "Create Jwt User";
+
+	var urlTemplate = Url.Action() + "?&jwtUserId={0}";
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "jwtUserId") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="col-md-12">
+	<form asp-action="Create">
+		<div class="form-horizontal">
+		<hr />
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="form-group">
+			<label asp-for="UserName" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="UserName" class="form-control" />
+				<span asp-validation-for="UserName" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Password" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="Password" class="form-control" />
+				<span asp-validation-for="Password" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Create" class="btn btn-default" 
+					asp-route-referer="@ViewData["referer"]" />
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div>
+	<a href="@ViewData["referer"]">CANCEL</a>
+</div>
+
+@section Scripts
+{
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

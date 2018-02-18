@@ -1,0 +1,47 @@
+<!-- 
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Manage your account";
+}
+
+<h2>@ViewData["Title"].</h2>
+<p class="text-success">@ViewData["StatusMessage"]</p>
+
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Password:</dt>
+        <dd>
+            @if (Model.HasPassword)
+            {
+                <a asp-controller="Manage" asp-action="ChangePassword" class="btn btn-default">Change</a>
+            }
+            else
+            {
+                <a asp-controller="Manage" asp-action="SetPassword" class="btn btn-default">Create</a>
+            }
+        </dd>
+        <dt>External Logins:</dt>
+        <dd>
+            You have @Model.Logins.Count extrnal accounts (Facebook, Google, Microsoft, Twitter)
+            <br />
+            <a asp-controller="Manage" asp-action="ManageLogins" class="btn btn-default">Manage</a>
+        </dd>
+    </dl>
+</div>

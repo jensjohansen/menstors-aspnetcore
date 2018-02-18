@@ -1,0 +1,80 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:43 PM */ -->
+
+
+@model Academy.Mentors.Administration.PaginatedList<Academy.Mentors.Models.Contributor>
+@{
+	var urlTemplate = Url.Action() + "?contributorsPage=" + Model.PageIndex.ToString();
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "contributorsPage") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th><!-- nav --></th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Degree</th>
+					<th>Alma Mater</th>
+					<th>Email</th>
+					<th>Evaluations</th>
+					<th>Password</th>
+					<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{ 
+		<tr>
+				<td>
+					<a href="/Contributors/Details/@item.Id"><img src="~/images/ButtonBarViewOver.gif" /></a>
+					<a href="/Contributors/Edit/@item.Id"><img src="~/images/ButtonBarEditOver.gif" /></a>
+					<a href="/Contributors/Delete/@item.Id"><img src="~/images/ButtonBarDeleteOver.gif" /></a>
+				</td>
+				<td>@Html.DisplayFor(modelItem => item.Name)</td>
+				<td>@Html.DisplayFor(modelItem => item.Description)</td>
+				<td>@Html.DisplayFor(modelItem => item.Degree)</td>
+				<td>@Html.DisplayFor(modelItem => item.AlmaMater)</td>
+				<td>@Html.DisplayFor(modelItem => item.Email)</td>
+				<td>@Html.DisplayFor(modelItem => item.Evaluations)</td>
+				<td>@Html.DisplayFor(modelItem => item.Password)</td>
+				<td>@Html.DisplayFor(modelItem => item.Comments)</td>
+		</tr>
+		}
+	</tbody>
+</table>
+@{
+	var prevDisabled = !Model.HasPreviousPage ? "disabled" : ""; 
+	var nextDisabled = !Model.HasNextPage ? "disabled" : ""; 
+}
+
+<a class="btn btn-default" href="@urlTemplate.Replace("contributorsPage=" + Model.PageIndex.ToString(),"contributorsPage=1")">First</a>
+
+<a class="btn btn-default" href="@urlTemplate.Replace("contributorsPage=" + Model.PageIndex.ToString(),"contributorsPage=" + (Model.PageIndex - 1).ToString())">Previous</a>
+
+&nbsp; - Page @(Model.PageIndex) of @(Model.TotalPages) - &nbsp;
+
+<a class="btn btn-default" href="@urlTemplate.Replace("contributorsPage=" + Model.PageIndex.ToString(),"contributorsPage=" + (Model.PageIndex + 1).ToString())">Next</a>
+
+<a class="btn btn-default" href="@urlTemplate.Replace("contributorsPage=" + Model.PageIndex.ToString(),"contributorsPage=" + (Model.TotalPages).ToString())">Last</a>
+

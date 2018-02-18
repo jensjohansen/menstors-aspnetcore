@@ -1,0 +1,30 @@
+{ 
+  "iisSettings": { 
+    "windowsAuthentication": false, 
+    "anonymousAuthentication": true, 
+    "iisExpress": { 
+      "applicationUrl": "http://localhost:50352/", 
+      "sslPort": 0 
+    } 
+  }, 
+  "profiles": { 
+    "IIS Express": { 
+      "commandName": "IISExpress", 
+      "launchBrowser": true, 
+      "launchUrl": "swagger", 
+      "environmentVariables": { 
+        "ASPNETCORE_ENVIRONMENT": "Development", 
+        "Api_Signer_Key": "Academy.Mentors {e094d656-391a-47f6-999a-f6127f21f29f}" 
+      } 
+    }, 
+    "web": { 
+      "commandName": "Project", 
+      "launchBrowser": true, 
+      "launchUrl": "http://localhost:5000/swagger", 
+      "environmentVariables": { 
+        "ASPNETCORE_ENVIRONMENT": "Development", 
+        "Api_Signer_Key": "Academy.Mentors {e094d656-391a-47f6-999a-f6127f21f29f}" 
+      } 
+    } 
+  } 
+} 

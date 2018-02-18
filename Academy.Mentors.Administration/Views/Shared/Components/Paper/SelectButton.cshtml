@@ -1,0 +1,30 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:43 PM */ -->
+
+
+@model Academy.Mentors.Models.Paper
+@{
+	var urlTemplate = Url.Action() + "?" + @ViewData["returnField"] + "={0}";
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "paperId") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+<a class="btn btn-default" href='~/Papers/Select/?selectedId=@Model.Id&referred="@urlTemplate"&contributorId=@ViewData["contributorId"]&auditEnteredBy=@ViewData["auditEnteredBy"]&auditUpdatedBy=@ViewData["auditUpdatedBy"]'>Select</a>

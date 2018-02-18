@@ -1,0 +1,348 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:44 PM*/ -->
+
+
+@model Academy.Mentors.Administration.PaginatedList<Academy.Mentors.Models.TestField>
+@{
+	ViewData["Title"] = "Test Fields";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+	<a asp-action="Create"
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+			>Create new TestField</a>
+</p>
+
+<form asp-action="Index" method="get">
+	<div class="form-actions no-color">
+		<p>
+			Find:&nbsp;
+ 			<input name="searchString" type="text" value="@ViewData["currentFilter"]" />
+			<input name="CurrentSort" type="hidden" value="@ViewData["CurrentSort"]" />
+			<input name="pageSize" type="hidden" value="@ViewData["pageSize"]" />
+			<input name="AuditEnteredBy" type="hidden" value="@ViewData["AuditEnteredBy"]" />
+			<input name="AuditUpdatedBy" type="hidden" value="@ViewData["AuditUpdatedBy"]" />
+			<input type="submit" value="Search" class="btn btn-default" /> |
+			<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+			>Clear Search</a>
+		</p>
+	</div>
+</form>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th><!-- nav --></th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["NameSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Name</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["DescriptionSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Description</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyBooleanSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Boolean</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyCreditCardSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Credit Card</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyCurrencySortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Currency</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyDateTimeSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Date Time</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyDoubleSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Double</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyEmailSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Email</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyFloatSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Float</a>
+				</th>
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyImageUrlSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Image Url</a>
+				</th>
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyIntegerSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Integer</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyLongSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Long</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyPhoneSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Phone</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyPostalCodeSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Postal Code</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyStringSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My String</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyTextAreaSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Text Area</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyTicksSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Ticks</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["MyUrlSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>My Url</a>
+				</th>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<th><a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CommentsSortParm"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					>Comments</a>
+				</th>
+Comment or uncomment appropriate fields -->
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{ 
+		<tr>
+				<td>
+				<a asp-action="Details" 
+					asp-route-id="@item.Id"
+					asp-route-sortOrder="CurrentSort"
+					asp-route-currentFilter="CurrentFilter"
+					asp-route-page="page"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					><img src="~/images/ButtonBarViewOver.gif" /></a>
+				<a asp-action="Edit" 
+					asp-route-id="@item.Id"
+					asp-route-sortOrder="CurrentSort"
+					asp-route-currentFilter="CurrentFilter"
+					asp-route-page="page"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					><img src="~/images/ButtonBarEditOver.gif" /></a>
+				<a asp-action="Delete" 
+					asp-route-id="@item.Id"
+					asp-route-sortOrder="CurrentSort"
+					asp-route-currentFilter="CurrentFilter"
+					asp-route-page="page"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					><img src="~/images/ButtonBarDeleteOver.gif" /></a>
+				</td>
+				<td>@Html.DisplayFor(modelItem => item.Name)</td>
+				<td>@Html.DisplayFor(modelItem => item.Description)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyBoolean)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyCreditCard)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyCurrency)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyDateTime)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyDouble)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyEmail)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyFloat)</td>
+				<td>@Html.DisplayFor(modelItem => item.MyImageUrl)</td>
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyInteger)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyLong)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyPhone)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyPostalCode)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyString)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyTextArea)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyTicks)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.MyUrl)</td>
+Comment or uncomment appropriate fields -->
+<!-- Comment or uncomment appropriate fields
+				<td>@Html.DisplayFor(modelItem => item.Comments)</td>
+Comment or uncomment appropriate fields -->
+		</tr>
+		}
+	</tbody>
+</table>
+@{
+	var prevDisabled = !Model.HasPreviousPage ? "disabled" : ""; 
+	var nextDisabled = !Model.HasNextPage ? "disabled" : ""; 
+}
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="1"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">First</a>
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="@(Model.PageIndex - 1)"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">Previous</a>
+
+&nbsp; - Page @(Model.PageIndex) of @(Model.TotalPages) - &nbsp;
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="@(Model.PageIndex + 1)"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">Next</a>
+
+<a asp-action="Index" 
+					asp-route-sortOrder="@ViewData["CurrentSort"]"
+					asp-route-currentFilter="@ViewData["CurrentFilter"]"
+					asp-route-page="@(Model.TotalPages)"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+					class="btn btn-default">Last</a>
+

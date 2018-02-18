@@ -1,0 +1,105 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:44 PM */ -->
+
+
+@model Academy.Mentors.Models.Review
+@{
+	ViewData["Title"] = "Review Details";
+
+	var urlTemplate = Url.Action() + "?&reviewId={0}";
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "reviewId") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="col-md-6 pull-left">
+	<div class="panel panel-default">
+		<div class="panel-heading">Details</div>
+		<div class="panel-body">
+			<dl class="dl-horizontal">
+				<dt>@Html.DisplayNameFor(model => model.Id)</dt>
+				<dd>@Html.DisplayFor(model => model.Id)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Name)</dt>
+				<dd>@Html.DisplayFor(model => model.Name)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Description)</dt>
+				<dd>@Html.DisplayFor(model => model.Description)</dd>
+				<dt>@Html.DisplayNameFor(model => model.ContributorId)</dt>
+				<dd>@Html.DisplayFor(model => model.ContributorId)</dd>
+				<dt>@Html.DisplayNameFor(model => model.PaperId)</dt>
+				<dd>@Html.DisplayFor(model => model.PaperId)</dd>
+				<dt>@Html.DisplayNameFor(model => model.PaperVersionId)</dt>
+				<dd>@Html.DisplayFor(model => model.PaperVersionId)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Comments)</dt>
+				<dd>@Html.DisplayFor(model => model.Comments)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditEntered)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditEntered)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditEnteredBy)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditEnteredBy)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditUpdated)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditUpdated)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditUpdatedBy)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditUpdatedBy)</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6 ">
+	<div class="panel panel-default">
+		<div class="panel-heading">Contributor</div>
+		<div class="panel-body"> 
+			@await Component.InvokeAsync("Contributor", new { id = Model.ContributorId, returnField = "contributorId", viewType = "Tile" }) 
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6 ">
+	<div class="panel panel-default">
+		<div class="panel-heading">Paper</div>
+		<div class="panel-body"> 
+			@await Component.InvokeAsync("Paper", new { id = Model.PaperId, returnField = "paperId", viewType = "Tile" }) 
+		</div>
+	</div>
+</div>
+
+<div class="col-md-6 ">
+	<div class="panel panel-default">
+		<div class="panel-heading">Paper Version</div>
+		<div class="panel-body"> 
+			@await Component.InvokeAsync("PaperVersion", new { id = Model.PaperVersionId, returnField = "paperVersionId", viewType = "Tile" }) 
+		</div>
+	</div>
+</div>
+
+<div class="col-md-12"> 
+			<a asp-action="Edit" 
+					asp-route-Id="@Model.Id"
+					asp-route-pageSize="@ViewData["pageSize"]"
+					asp-route-contributorId="@ViewData["contributorId"]"
+					asp-route-paperId="@ViewData["paperId"]"
+					asp-route-paperVersionId="@ViewData["paperVersionId"]"
+					asp-route-auditEnteredBy="@ViewData["auditEnteredBy"]"
+					asp-route-auditUpdatedBy="@ViewData["auditUpdatedBy"]"
+			>Edit this record</a> | 
+	<a href="@ViewData["referer"]">Return to List</a>
+</div>

@@ -1,0 +1,57 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:44 PM */ -->
+
+
+@model Academy.Mentors.Models.JwtUser
+@{
+	ViewData["Title"] = "Jwt User Details";
+
+	var urlTemplate = Url.Action() + "?&jwtUserId={0}";
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "jwtUserId") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="col-md-6 pull-left">
+	<div class="panel panel-default">
+		<div class="panel-heading">Details</div>
+		<div class="panel-body">
+			<dl class="dl-horizontal">
+				<dt>@Html.DisplayNameFor(model => model.Id)</dt>
+				<dd>@Html.DisplayFor(model => model.Id)</dd>
+				<dt>@Html.DisplayNameFor(model => model.UserName)</dt>
+				<dd>@Html.DisplayFor(model => model.UserName)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Password)</dt>
+				<dd>@Html.DisplayFor(model => model.Password)</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+<div class="col-md-12"> 
+			<a asp-action="Edit" 
+					asp-route-Id="@Model.Id"
+					asp-route-pageSize="@ViewData["pageSize"]"
+			>Edit this record</a> | 
+	<a href="@ViewData["referer"]">Return to List</a>
+</div>

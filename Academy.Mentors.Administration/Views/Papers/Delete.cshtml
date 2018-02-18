@@ -1,0 +1,83 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:43 PM */ -->
+
+
+@model Academy.Mentors.Models.Paper
+@{
+	ViewData["Title"] = "Delete Paper";
+
+	var urlTemplate = Url.Action() + "?&paperId={0}";
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "paperId") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h2>Are you sure you want to delete this?</h2>
+<div>
+<hr />
+<div class="col-md-12">
+	<div class="panel panel-default">
+		<div class="panel-heading">Details</div>
+		<div class="panel-body">
+			<dl class="dl-horizontal">
+				<dt>@Html.DisplayNameFor(model => model.Id)</dt>
+				<dd>@Html.DisplayFor(model => model.Id)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Name)</dt>
+				<dd>@Html.DisplayFor(model => model.Name)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Description)</dt>
+				<dd>@Html.DisplayFor(model => model.Description)</dd>
+				<dt>@Html.DisplayNameFor(model => model.ContributorId)</dt>
+				<dd>@Html.DisplayFor(model => model.ContributorId)</dd>
+				<dt>@Html.DisplayNameFor(model => model.Comments)</dt>
+				<dd>@Html.DisplayFor(model => model.Comments)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditEntered)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditEntered)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditEnteredBy)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditEnteredBy)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditUpdated)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditUpdated)</dd>
+				<dt>@Html.DisplayNameFor(model => model.AuditUpdatedBy)</dt>
+				<dd>@Html.DisplayFor(model => model.AuditUpdatedBy)</dd>
+			</dl>
+		</div>
+	</div>
+</div>
+
+	<form asp-action="Delete" >
+		<div class="form-actions no-color">
+			<input type="hidden" asp-for="Id" />
+			<input type="hidden" name="SearchString" value="@ViewData["currentFilter"]" />
+			<input name="pageSize" type="hidden" value="@ViewData["pageSize"]" />
+			<input name="ContributorId" type="hidden" value="@ViewData["ContributorId"]" />
+			<input name="AuditEnteredBy" type="hidden" value="@ViewData["AuditEnteredBy"]" />
+			<input name="AuditUpdatedBy" type="hidden" value="@ViewData["AuditUpdatedBy"]" />
+				<input type="submit" value="Save" class="btn btn-default" 
+					asp-route-referer="@ViewData["referer"]" />
+	</form>
+
+</div>
+<div>
+	<a href="@ViewData["referer"]">CANCEL</a>
+</div>
+
+</div>

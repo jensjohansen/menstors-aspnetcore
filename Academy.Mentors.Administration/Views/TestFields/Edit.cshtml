@@ -1,0 +1,191 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:44 PM */ -->
+
+
+@model Academy.Mentors.Models.TestField
+@{
+	ViewData["Title"] = "Edit Test Field (" + Model.Id + ")";
+
+	var urlTemplate = Url.Action() + "?&testFieldId={0}";
+	var request = ViewContext.HttpContext.Request;
+	foreach (var key in request.Query.Keys)
+	{
+		if (key == "testFieldId") { continue; }
+		urlTemplate += "&" + key + "=" + request.Query[key];
+	}
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="col-md-12">
+	<form asp-action="Edit">
+		<div class="form-horizontal">
+		<hr />
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<input type="hidden" asp-for="Id" />
+		<div class="form-group">
+			<label asp-for="Name" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Description" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="Description" class="form-control" />
+				<span asp-validation-for="Description" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyBoolean" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyBoolean" class="form-control" />
+				<span asp-validation-for="MyBoolean" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyCreditCard" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyCreditCard" class="form-control" />
+				<span asp-validation-for="MyCreditCard" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyCurrency" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyCurrency" class="form-control" />
+				<span asp-validation-for="MyCurrency" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyDateTime" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyDateTime" class="form-control" />
+				<span asp-validation-for="MyDateTime" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyDouble" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyDouble" class="form-control" />
+				<span asp-validation-for="MyDouble" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyEmail" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyEmail" class="form-control" />
+				<span asp-validation-for="MyEmail" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyFloat" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyFloat" class="form-control" />
+				<span asp-validation-for="MyFloat" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyImageUrl" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyImageUrl" class="form-control" />
+				<span asp-validation-for="MyImageUrl" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyInteger" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyInteger" class="form-control" />
+				<span asp-validation-for="MyInteger" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyLong" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyLong" class="form-control" />
+				<span asp-validation-for="MyLong" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyPhone" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyPhone" class="form-control" />
+				<span asp-validation-for="MyPhone" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyPostalCode" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyPostalCode" class="form-control" />
+				<span asp-validation-for="MyPostalCode" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyString" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyString" class="form-control" />
+				<span asp-validation-for="MyString" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyTextArea" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyTextArea" class="form-control" />
+				<span asp-validation-for="MyTextArea" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyTicks" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyTicks" class="form-control" />
+				<span asp-validation-for="MyTicks" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="MyUrl" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<input asp-for="MyUrl" class="form-control" />
+				<span asp-validation-for="MyUrl" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Comments" class="col-md-2 control-label"></label>
+			<div class="col-md-10">
+				<textarea asp-for="Comments" class="form-control"></textarea>
+				<span asp-validation-for="Comments" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="Save" class="btn btn-default" 
+					asp-route-referer="@ViewData["referer"]" />
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+<div>
+	<a href="@ViewData["referer"]">CANCEL</a>
+</div>
+
+@section Scripts
+{
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

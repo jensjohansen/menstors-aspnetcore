@@ -1,0 +1,30 @@
+<!--
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+<!-- /* Powered by Solution Zone (http://www.solution.zone)  2/14/2018 1:37:44 PM */ -->
+
+
+@model Academy.Mentors.Models.TestField
+<div>	<a href="~/TestFields/Details/@Html.DisplayFor(model => model.Id)">@Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Description) (@Html.DisplayFor(model => model.Id))</a>
+	<dl class="dl-horizontal">
+		<dt>@Html.DisplayNameFor(model => model.Name)</dt>
+		<dd>@Html.DisplayFor(model => model.Name)</dd>
+		<dt>@Html.DisplayNameFor(model => model.Description)</dt>
+		<dd>@Html.DisplayFor(model => model.Description)</dd>
+		<dt>@Html.DisplayNameFor(model => model.MyCreditCard)</dt>
+		<dd>@Html.DisplayFor(model => model.MyCreditCard)</dd>
+	</dl>
+</div>

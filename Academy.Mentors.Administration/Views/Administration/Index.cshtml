@@ -1,0 +1,88 @@
+<!-- 
+/*
+Project: Mentors Academy
+Copyright © 2018 Solution Zone, LLC.. All rights reserved.
+Author: John K Johansen
+
+Description: Mentors Academy is a self-publishing site where students can share academic papers and discoveries.
+
+Details: The implementation of Mentors Academy
+
+
+*/
+
+
+-->
+
+@{
+    ViewData["Title"] = "Administration Page";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    SZ Architech - Data Designer for High Performance Web Applications
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    SZ ApiGen - API generator for developing robust edge computing apps
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    SZ Admin - Admin tool for Company Internal use
+                </p>
+            </div>
+        </div>
+        <div class="item">
+            <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                <p>
+                    SZ Portal - Basic elements of a signed in Portal application
+                </p>
+            </div>
+        </div>
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="col-md-3">
+    <div class="panel panel-default">
+        <div class="panel-heading">Entities</div>
+        <div class="panel-body">
+            <a href="~/JwtUsers">AUTH JWT Users</a><br />
+            <a href="~/Contributors">Contributors</a><br />
+            <a href="~/Papers">Papers</a><br />
+            <a href="~/PaperVersions">PaperVersions</a><br />
+            <a href="~/Reviews">Reviews</a><br />
+            <a href="~/TestFields">TestFields</a><br />
+        </div>
+    </div>
+</div>
